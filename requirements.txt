@@ -1,0 +1,5 @@
+streamlit>=1.45,<2
+Pillow>=10,<13
+torch>=2.2,<3
+transformers>=4.40,<5
+safetensors>=0.4

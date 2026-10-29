@@ -1,0 +1,8 @@
+models/
+*.safetensors
+*.zip
+.venv/
+venv/
+__pycache__/
+.streamlit/secrets.toml
+.env
