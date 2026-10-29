@@ -1,45 +1,71 @@
-# AuraPix — Python + Streamlit
+# AuraPix
 
-واجهة قريبة من الصور المرجعية، باسم AuraPix، مع البحث عن الصور ووصف الصور وعن المشروع، وعربي/إنجليزي وفاتح/داكن. صورة الشبكة جديدة وليست الصورة الأصلية؛ عناصر رفع الملفات والقوائم تستخدم عناصر Streamlit، لذلك ليست نسخة مطابقة بالبكسل.
+**AuraPix** is an AI-powered image search and image captioning application built with Python and Streamlit.
 
-## التشغيل على Windows من Visual Studio Code
-استخدمي Python 3.11 أو 3.12 بنسخة 64-bit. فكّي الضغط وافتحي مجلد AuraPix ثم افتحي Terminal:
+## Features
 
-```powershell
-python -m venv .venv
-.venv\Scripts\python.exe -m pip install -r requirements.txt
-.venv\Scripts\python.exe -m streamlit run app.py
-```
+- **Image Search:** Find images using text descriptions.
+- **Image Captioning:** Generate descriptions for uploaded images.
+- **Arabic and English:** Switch between two interface languages.
+- **Light and Dark Modes:** Choose your preferred appearance.
+- **Simple Interface:** Easy-to-use design for a smooth experience.
 
-لا يلزم تفعيل البيئة، فتتفادي مشكلة صلاحيات PowerShell. على macOS/Linux استبدلي `.venv\Scripts\python.exe` بـ `.venv/bin/python`.
+## Technologies
 
-## أين أعدل؟
-- `styles.py`: ألوان LIGHT/DARK وكل تنسيقات الشكل، بما فيها الشريط العلوي وأيقونات قائمته.
-- `app.py`: ترتيب الأقسام، أزرار الصفحات ورفع الصور.
-- `i18n.py`: النصوص الإنجليزية والعربية.
-- `assets/network.jpg`: الصورة التي تظهر أعلى البحث ووصف الصور.
-- `models.py`: تحميل CLIP وBLIP واستدعاؤهما.
-- `.streamlit/config.toml`: إعدادات Streamlit الأساسية؛ مفتاح الداكن داخل التطبيق يستخدم styles.py.
+- Python
+- Streamlit
+- PyTorch
+- Hugging Face Transformers
+- CLIP for image search
+- BLIP for image captioning
 
-## النماذج
-عند أول بحث أو وصف يلزم إنترنت لتنزيل openai/clip-vit-base-patch32 وSalesforce/blip-image-captioning-base؛ التنزيلات كبيرة وقد تستغرق وقتًا. بعد تخزين النماذج محليًا يمكن استخدامها دون اتصال إذا اكتمل التخزين. CPU مدعوم؛ GPU اختياري. لا تحتاجين API key أو FastAPI.
+## Run Locally
 
-لتشغيل نماذجك المدربة، حددي قبل التشغيل في PowerShell:
+1. Install Python 3.11 or 3.12 (64-bit).
+2. Open the project folder in Visual Studio Code.
+3. Open the terminal and create a virtual environment:
 
-```powershell
-$env:CLIP_MODEL="C:\models\my-clip"
-$env:BLIP_MODEL="C:\models\my-blip"
-.venv\Scripts\python.exe -m streamlit run app.py
-```
+   ```bash
+   python -m venv .venv
+   ```
 
-المجلدات يجب أن تكون بتنسيق Hugging Face وتحتوي ملفات النموذج والمعالج/tokenizer. الافتراضي يكتب وصف الصور بالإنجليزية، حتى مع الواجهة العربية. وصف البحث بالإنجليزية أفضل للنموذج الافتراضي.
+4. Install the required packages:
 
-درجة النتائج هي cosine similarity وليست نسبة احتمال أو دقة. البيانات Flickr30K غير مرفقة. الصور المرفوعة لا تُرسل لخدمة استدلال خارجية، لكن تنزيل النماذج والخطوط/المكتبات يتطلب اتصالًا حسب البيئة.
+   **Windows:**
+   ```powershell
+   .venv\Scripts\python.exe -m pip install -r requirements.txt
+   ```
 
-## الاختبارات
-```powershell
-.venv\Scripts\python.exe -m pip install pytest
-.venv\Scripts\python.exe -m pytest tests
-```
+5. Start the application:
 
-تم فصل تحميل النماذج عن فتح الواجهة، فيمكن معاينة الصفحات بعد تثبيت Streamlit وPillow فقط. الاستدلال يتطلب كل مكتبات requirements.txt.
+   ```powershell
+   .venv\Scripts\python.exe -m streamlit run app.py
+   ```
+
+## Project Structure
+
+- `app.py` — Main application and interface.
+- `models.py` — Loads and runs the AI models.
+- `logic.py` — Image search and processing logic.
+- `styles.py` — Application styling and themes.
+- `i18n.py` — Arabic and English translations.
+- `assets/` — Images used in the interface.
+- `tests/` — Project tests.
+
+## AI Models
+
+AuraPix uses CLIP for text-based image search and BLIP for image captioning.
+
+The application can be configured to load trained models from private Hugging Face repositories. Keep access tokens and other secrets in Streamlit Secrets or environment variables. **Never upload tokens or private model weights to a public repository.**
+
+Model downloads and inference may require an internet connection and sufficient memory, depending on the configuration.
+
+## Notes
+
+- Image search scores represent cosine similarity, not probabilities.
+- The Flickr30K dataset is not included in this repository.
+- Performance depends on the models and hardware being used.
+
+## License
+
+Add a license if you decide to distribute this project under specific reuse terms.
