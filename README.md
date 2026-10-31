@@ -65,7 +65,3 @@ Model downloads and inference may require an internet connection and sufficient 
 - Image search scores represent cosine similarity, not probabilities.
 - The Flickr30K dataset is not included in this repository.
 - Performance depends on the models and hardware being used.
-
-## License
-
-Add a license if you decide to distribute this project under specific reuse terms.
